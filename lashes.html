@@ -4,145 +4,318 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lashes | Akirah Beauty</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- Header -->
+  <div class="announcement-bar">
+    <p>Custom beauty boxes available now &nbsp;·&nbsp; Order via WhatsApp</p>
+  </div>
+
   <header class="header">
-    <div class="container nav-container">
+    <div class="nav-container">
       <div class="logo">
         <a href="index.html">Akirah Beauty</a>
       </div>
-
       <nav class="navbar">
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="lashes.html">Lashes</a></li>
+          <li><a href="lashes.html" class="active">Lashes</a></li>
           <li><a href="beauty-boxes.html">Beauty Boxes</a></li>
           <li><a href="custom-boxes.html">Custom Boxes</a></li>
           <li><a href="self-care.html">Self Care</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-
-      <a href="contact.html" class="btn btn-primary">Order Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="contact.html" class="btn btn-primary nav-cta">Order Now</a>
     </div>
   </header>
 
-  <!-- Page Header -->
-  <section class="section">
-    <div class="container section-heading">
-      <h2>Lash Collection</h2>
-      <p>Soft, elegant lashes designed to enhance your natural beauty.</p>
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lashes.html">Lashes</a></li>
+      <li><a href="beauty-boxes.html">Beauty Boxes</a></li>
+      <li><a href="custom-boxes.html">Custom Boxes</a></li>
+      <li><a href="self-care.html">Self Care</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary">Order Now</a>
+  </div>
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <span class="hero-label">The Collection</span>
+      <h1>Lash <em>Collection</em></h1>
+      <p>Soft, elegant lashes designed to enhance your natural beauty — from barely-there to full glam.</p>
     </div>
   </section>
 
-  <!-- NATURAL -->
-  <section class="section">
+  <!-- FILTER TABS -->
+  <div class="filter-bar">
     <div class="container">
-      <div class="section-heading">
-        <h2>Natural Collection</h2>
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="natural">Natural</button>
+        <button class="filter-btn" data-filter="soft-glam">Soft Glam</button>
+        <button class="filter-btn" data-filter="full-glam">Full Glam</button>
       </div>
+    </div>
+  </div>
 
-      <div class="product-grid">
-
-        <div class="product-card">
-          <img src="images/lash1.jpeg" alt="Barely There Lash" />
-          <h3>Akirah “Barely There”</h3>
-          <p>Lightweight, natural lashes for an everyday look.</p>
-          <span class="price">R100</span>
-          <a href="contact.html" class="btn btn-primary">Order Now</a>
+  <!-- NATURAL COLLECTION -->
+  <section class="lash-section" data-collection="natural">
+    <div class="container">
+      <div class="collection-header">
+        <div class="collection-label">Natural</div>
+        <h2 class="collection-title">Natural Collection</h2>
+        <p class="collection-sub">Lightweight and understated — perfect for everyday wear.</p>
+      </div>
+      <div class="lash-grid">
+        <div class="lash-card" data-category="natural">
+          <div class="lash-img">
+            <img src="images/lash1.jpeg" alt="Barely There Lash" />
+            <div class="lash-overlay">
+              <a href="contact.html" class="btn btn-light">Order Now</a>
+            </div>
+          </div>
+          <div class="lash-info">
+            <div class="lash-top">
+              <h3>Akirah "Barely There"</h3>
+              <span class="lash-price">R100</span>
+            </div>
+            <p>Lightweight, natural lashes for an everyday look.</p>
+            <div class="lash-tags">
+              <span class="lash-tag">Natural</span>
+              <span class="lash-tag">Everyday</span>
+            </div>
+          </div>
         </div>
-
-        <div class="product-card">
-          <img src="images/lash2.jpeg" alt="Soft Touch Lash" />
-          <h3>Akirah “Soft Touch”</h3>
-          <p>Subtle definition with a soft finish.</p>
-          <span class="price">R110</span>
-          <a href="contact.html" class="btn btn-primary">Order Now</a>
+        <div class="lash-card" data-category="natural">
+          <div class="lash-img">
+            <img src="images/lash2.jpeg" alt="Soft Touch Lash" />
+            <div class="lash-overlay">
+              <a href="contact.html" class="btn btn-light">Order Now</a>
+            </div>
+          </div>
+          <div class="lash-info">
+            <div class="lash-top">
+              <h3>Akirah "Soft Touch"</h3>
+              <span class="lash-price">R110</span>
+            </div>
+            <p>Subtle definition with a soft, feathery finish.</p>
+            <div class="lash-tags">
+              <span class="lash-tag">Natural</span>
+              <span class="lash-tag">Soft</span>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- SOFT GLAM -->
-  <section class="section">
+  <!-- SOFT GLAM COLLECTION -->
+  <section class="lash-section lash-section--alt" data-collection="soft-glam">
     <div class="container">
-      <div class="section-heading">
-        <h2>Soft Glam Collection</h2>
+      <div class="collection-header">
+        <div class="collection-label">Soft Glam</div>
+        <h2 class="collection-title">Soft Glam Collection</h2>
+        <p class="collection-sub">A little more drama, effortlessly elegant.</p>
       </div>
-
-      <div class="product-grid">
-
-        <div class="product-card">
-          <img src="images/lash3.jpeg" alt="Golden Hour Lash" />
-          <h3>Akirah “Golden Hour”</h3>
-          <p>Soft glam lashes with a natural glow.</p>
-          <span class="price">R120</span>
-          <a href="contact.html" class="btn btn-primary">Order Now</a>
+      <div class="lash-grid lash-grid--3">
+        <div class="lash-card" data-category="soft-glam">
+          <div class="lash-img">
+            <img src="images/lash3.jpeg" alt="Golden Hour Lash" />
+            <div class="lash-overlay">
+              <a href="contact.html" class="btn btn-light">Order Now</a>
+            </div>
+            <div class="product-badge">Best Seller</div>
+          </div>
+          <div class="lash-info">
+            <div class="lash-top">
+              <h3>Akirah "Golden Hour"</h3>
+              <span class="lash-price">R120</span>
+            </div>
+            <p>Soft glam lashes with a warm, natural glow.</p>
+            <div class="lash-tags">
+              <span class="lash-tag">Soft Glam</span>
+              <span class="lash-tag">Versatile</span>
+            </div>
+          </div>
         </div>
-
-        <div class="product-card">
-          <img src="images/lash4.jpeg" alt="Velvet Touch Lash" />
-          <h3>Akirah “Velvet Touch”</h3>
-          <p>Elegant volume for a refined glam look.</p>
-          <span class="price">R120</span>
-          <a href="contact.html" class="btn btn-primary">Order Now</a>
+        <div class="lash-card" data-category="soft-glam">
+          <div class="lash-img">
+            <img src="images/lash4.jpeg" alt="Velvet Touch Lash" />
+            <div class="lash-overlay">
+              <a href="contact.html" class="btn btn-light">Order Now</a>
+            </div>
+          </div>
+          <div class="lash-info">
+            <div class="lash-top">
+              <h3>Akirah "Velvet Touch"</h3>
+              <span class="lash-price">R120</span>
+            </div>
+            <p>Elegant volume for a refined, polished look.</p>
+            <div class="lash-tags">
+              <span class="lash-tag">Soft Glam</span>
+              <span class="lash-tag">Refined</span>
+            </div>
+          </div>
         </div>
-
-        <div class="product-card">
-          <img src="images/lash5.jpeg" alt="Blush Babe Lash" />
-          <h3>Akirah “Blush Babe”</h3>
-          <p>Soft fullness perfect for day or night.</p>
-          <span class="price">R120</span>
-          <a href="contact.html" class="btn btn-primary">Order Now</a>
+        <div class="lash-card" data-category="soft-glam">
+          <div class="lash-img">
+            <img src="images/lash5.jpeg" alt="Blush Babe Lash" />
+            <div class="lash-overlay">
+              <a href="contact.html" class="btn btn-light">Order Now</a>
+            </div>
+          </div>
+          <div class="lash-info">
+            <div class="lash-top">
+              <h3>Akirah "Blush Babe"</h3>
+              <span class="lash-price">R120</span>
+            </div>
+            <p>Soft fullness perfect for day or night.</p>
+            <div class="lash-tags">
+              <span class="lash-tag">Soft Glam</span>
+              <span class="lash-tag">Day to Night</span>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- FULL GLAM -->
-  <section class="section">
+  <!-- FULL GLAM COLLECTION -->
+  <section class="lash-section" data-collection="full-glam">
     <div class="container">
-      <div class="section-heading">
-        <h2>Full Glam Collection</h2>
+      <div class="collection-header">
+        <div class="collection-label">Full Glam</div>
+        <h2 class="collection-title">Full Glam Collection</h2>
+        <p class="collection-sub">Bold, dramatic, unforgettable.</p>
       </div>
-
-      <div class="product-grid">
-
-        <div class="product-card">
-          <img src="images/lash6.jpeg" alt="Midnight Lash" />
-          <h3>Akirah “Midnight”</h3>
-          <p>Bold, dramatic lashes for a standout look.</p>
-          <span class="price">R140</span>
-          <a href="contact.html" class="btn btn-primary">Order Now</a>
+      <div class="lash-grid">
+        <div class="lash-card" data-category="full-glam">
+          <div class="lash-img">
+            <img src="images/lash6.jpeg" alt="Midnight Lash" />
+            <div class="lash-overlay">
+              <a href="contact.html" class="btn btn-light">Order Now</a>
+            </div>
+          </div>
+          <div class="lash-info">
+            <div class="lash-top">
+              <h3>Akirah "Midnight"</h3>
+              <span class="lash-price">R140</span>
+            </div>
+            <p>Bold, dramatic lashes for a standout look.</p>
+            <div class="lash-tags">
+              <span class="lash-tag">Full Glam</span>
+              <span class="lash-tag">Dramatic</span>
+            </div>
+          </div>
         </div>
-
-        <div class="product-card">
-          <img src="images/lash7.jpeg" alt="Showstopper Lash" />
-          <h3>Akirah “Showstopper”</h3>
-          <p>Full volume lashes for ultimate glam.</p>
-          <span class="price">R140</span>
-          <a href="contact.html" class="btn btn-primary">Order Now</a>
+        <div class="lash-card" data-category="full-glam">
+          <div class="lash-img">
+            <img src="images/lash7.jpeg" alt="Showstopper Lash" />
+            <div class="lash-overlay">
+              <a href="contact.html" class="btn btn-light">Order Now</a>
+            </div>
+            <div class="product-badge">Fan Fave</div>
+          </div>
+          <div class="lash-info">
+            <div class="lash-top">
+              <h3>Akirah "Showstopper"</h3>
+              <span class="lash-price">R140</span>
+            </div>
+            <p>Full volume lashes for ultimate, head-turning glam.</p>
+            <div class="lash-tags">
+              <span class="lash-tag">Full Glam</span>
+              <span class="lash-tag">Volume</span>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta section">
-    <div class="container cta-content">
-      <h2>Find your perfect lash style</h2>
-      <p>From natural to full glam, Akirah Beauty has a lash for every moment.</p>
-      <a href="contact.html" class="btn btn-primary">Order Now</a>
+  <section class="lash-cta">
+    <div class="container">
+      <div class="cta-box">
+        <p class="section-tag">Order Today</p>
+        <h2>Find your perfect lash style</h2>
+        <p>From natural to full glam, Akirah Beauty has a lash for every moment. Order via WhatsApp for fast delivery.</p>
+        <a href="contact.html" class="btn btn-light">Order Now</a>
+      </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">Akirah Beauty</span>
+        <p>Soft luxury beauty designed to enhance your natural radiance.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Shop</h4>
+        <a href="lashes.html">Lashes</a>
+        <a href="beauty-boxes.html">Beauty Boxes</a>
+        <a href="custom-boxes.html">Custom Boxes</a>
+        <a href="self-care.html">Self Care</a>
+      </div>
+      <div class="footer-links">
+        <h4>Info</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Akirah Beauty · All rights reserved</span>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const overlay = document.getElementById('mobileOverlay');
+    function toggleMenu() {
+      mobileNav.classList.toggle('open');
+      overlay.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    }
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    // Filter tabs
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const lashSections = document.querySelectorAll('.lash-section');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        lashSections.forEach(section => {
+          if (filter === 'all' || section.dataset.collection === filter) {
+            section.style.display = '';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
+
