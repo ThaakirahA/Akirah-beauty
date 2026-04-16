@@ -1,18 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Akirah Beauty</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Boxes | Akirah Beauty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .custom-hero{background:var(--charcoal);padding:90px 10% 70px;position:relative;overflow:hidden}
+    .custom-hero::before{content:'';position:absolute;right:-60px;top:-60px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(200,144,128,0.08) 0%,transparent 70%)}
+    .custom-hero-content{max-width:600px}
+    .custom-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,5vw,66px);font-weight:500;line-height:1.1;color:var(--white);margin:14px 0 20px}
+    .custom-hero h1 em{font-style:italic;color:var(--rose)}
+    .custom-hero p{font-size:15px;color:rgba(232,213,196,0.72);line-height:1.9;max-width:460px}
+
+    .how-it-works{padding:80px 10%;background:var(--blush)}
+    .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:52px}
+    .step{background:var(--blush);padding:40px 32px;display:flex;flex-direction:column;gap:16px}
+    .step-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:400;color:rgba(200,144,128,0.3);line-height:1}
+    .step h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal)}
+    .step p{font-size:13px;color:var(--warm-gray);line-height:1.8}
+
+    .pick-section{padding:80px 10%;background:var(--cream)}
+    .pick-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:40px}
+    .pick-tab{background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;padding:13px 20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:var(--warm-gray);cursor:pointer;transition:all 0.25s}
+    .pick-tab:hover{color:var(--charcoal)}
+    .pick-tab.active{color:var(--charcoal);border-bottom-color:var(--rose)}
+    .pick-panel{display:none}
+    .pick-panel.active{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .pick-item{background:var(--white);padding:16px;cursor:pointer;border:2px solid transparent;transition:all 0.25s;display:flex;flex-direction:column;gap:8px;position:relative}
+    .pick-item:hover{border-color:var(--nude)}
+    .pick-item.selected{border-color:var(--rose)}
+    .pick-item .check{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--rose);color:var(--white);font-size:10px;display:none;align-items:center;justify-content:center}
+    .pick-item.selected .check{display:flex}
+    .pick-item-img{aspect-ratio:1/1;overflow:hidden;background:var(--blush)}
+    .pick-item-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.88)}
+    .pick-item h4{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--charcoal)}
+    .pick-item p{font-size:11px;color:var(--warm-gray)}
+    .pick-item .item-price{font-size:12px;font-weight:500;color:var(--rose)}
+
+    .order-summary{background:var(--white);border:1px solid var(--border);padding:28px;margin-top:40px}
+    .summary-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--warm-gray);font-weight:500;margin-bottom:16px}
+    .summary-items{min-height:48px;font-size:13px;color:var(--warm-gray)}
+    .summary-footer{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+    .summary-total{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal)}
+    .summary-note{font-size:11px;color:var(--warm-gray);margin-top:12px}
+
+    .sizing-section{padding:72px 10%;background:var(--white)}
+    .sizing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+    .size-card{padding:32px 24px;border:1px solid var(--border);text-align:center;cursor:pointer;transition:all 0.25s}
+    .size-card:hover,.size-card.recommended{border-color:var(--rose);background:rgba(200,144,128,0.04)}
+    .size-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--rose);font-weight:500;margin-bottom:12px}
+    .size-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--charcoal);margin-bottom:6px}
+    .size-price-range{font-size:13px;color:var(--warm-gray);margin-bottom:16px}
+    .size-items{font-size:12px;color:var(--warm-gray)}
+
+    @media(max-width:900px){
+      .steps-grid{grid-template-columns:1fr}
+      .pick-panel.active{grid-template-columns:repeat(2,1fr)}
+      .sizing-grid{grid-template-columns:1fr}
+      .custom-hero{padding:64px 6% 52px}
+      .how-it-works,.pick-section,.sizing-section{padding:56px 6%}
+    }
+    @media(max-width:600px){
+      .pick-panel.active{grid-template-columns:1fr 1fr}
+      .pick-tabs{overflow-x:auto}
+      .pick-tab{white-space:nowrap;padding:12px 14px}
+    }
+  </style>
 </head>
 <body>
-  <section class="section">
-    <div class="container">
-      <h1>Page Coming Soon</h1>
-      <p>This page is under construction.</p>
-      <a href="index.html" class="btn btn-primary">Back Home</a>
+  <div class="announcement-bar">
+    <p>Free delivery on orders over R300 &nbsp;·&nbsp; Order via WhatsApp</p>
+  </div>
+  <header class="header">
+    <div class="nav-container">
+      <div class="logo"><a href="index.html">Akirah Beauty</a></div>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="lashes.html">Lashes</a></li>
+          <li><a href="beauty-boxes.html">Beauty Boxes</a></li>
+          <li><a href="custom-boxes.html" class="active">Custom Boxes</a></li>
+          <li><a href="self-care.html">Self Care</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <a href="contact.html" class="btn btn-primary nav-cta">Order Now</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="lashes.html">Lashes</a></li>
+      <li><a href="beauty-boxes.html">Beauty Boxes</a></li>
+      <li><a href="custom-boxes.html">Custom Boxes</a></li>
+      <li><a href="self-care.html">Self Care</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary">Order Now</a>
+  </div>
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <section class="custom-hero">
+    <div class="custom-hero-content">
+      <span class="hero-label">Personalised Gifting</span>
+      <h1>Build your <em>perfect</em> box</h1>
+      <p>Choose exactly what goes inside — from lashes to lip products, skincare to self-care. We'll package it beautifully and deliver it with love.</p>
     </div>
   </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">Simple Process</span>
+          <h2 class="section-title">How It Works</h2>
+        </div>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Choose Your Items</h3>
+          <p>Browse our catalogue below and select the products you'd like in your box. Mix and match from any category.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Send Us Your List</h3>
+          <p>Message us on WhatsApp with your selections. We'll confirm availability, pricing, and any special requests.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>We Pack & Deliver</h3>
+          <p>Your box is hand-packed with care and delivered to your door — beautifully presented, ready to impress.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOX SIZES -->
+  <section class="sizing-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">Start Here</span>
+          <h2 class="section-title">Choose a Box Size</h2>
+        </div>
+      </div>
+      <div class="sizing-grid">
+        <div class="size-card">
+          <p class="size-label">Small</p>
+          <h3>Mini Box</h3>
+          <p class="size-price-range">From R120</p>
+          <p class="size-items">2–3 items of your choice</p>
+        </div>
+        <div class="size-card recommended">
+          <p class="size-label">Most Popular ✦</p>
+          <h3>Classic Box</h3>
+          <p class="size-price-range">From R250</p>
+          <p class="size-items">4–6 items of your choice</p>
+        </div>
+        <div class="size-card">
+          <p class="size-label">Large</p>
+          <h3>Luxury Box</h3>
+          <p class="size-price-range">From R450</p>
+          <p class="size-items">7+ items of your choice</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PICK ITEMS -->
+  <section class="pick-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">Browse & Pick</span>
+          <h2 class="section-title">Choose Your Products</h2>
+        </div>
+      </div>
+      <div class="pick-tabs">
+        <button class="pick-tab active" data-panel="lashes">Lashes</button>
+        <button class="pick-tab" data-panel="lips">Lip Products</button>
+        <button class="pick-tab" data-panel="skin">Skin Care</button>
+        <button class="pick-tab" data-panel="extras">Extras</button>
+      </div>
+
+      <div class="pick-panel active" id="panel-lashes">
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img"><img src="images/lash1.jpeg" alt=""/></div><h4>"Barely There"</h4><p class="item-price">R100</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img"><img src="images/lash2.jpeg" alt=""/></div><h4>"Soft Touch"</h4><p class="item-price">R110</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img"><img src="images/lash3.jpeg" alt=""/></div><h4>"Golden Hour"</h4><p class="item-price">R120</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img"><img src="images/lash4.jpeg" alt=""/></div><h4>"Velvet Touch"</h4><p class="item-price">R120</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img"><img src="images/lash5.jpeg" alt=""/></div><h4>"Blush Babe"</h4><p class="item-price">R120</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img"><img src="images/lash6.jpeg" alt=""/></div><h4>"Midnight"</h4><p class="item-price">R140</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img"><img src="images/lash7.jpeg" alt=""/></div><h4>"Showstopper"</h4><p class="item-price">R140</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--nude);display:flex;align-items:center;justify-content:center;font-size:24px">🖤</div><h4>Lash Glue</h4><p class="item-price">R30</p></div>
+      </div>
+
+      <div class="pick-panel" id="panel-lips">
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:28px">💄</div><h4>Lip Liner</h4><p class="item-price">R60</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:28px">✨</div><h4>Lip Gloss</h4><p class="item-price">R55</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:28px">🌹</div><h4>Lip Scrub</h4><p class="item-price">R50</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:28px">💋</div><h4>Liner + Gloss Duo</h4><p class="item-price">R100</p></div>
+      </div>
+
+      <div class="pick-panel" id="panel-skin">
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--nude);display:flex;align-items:center;justify-content:center;font-size:28px">🌿</div><h4>Face Mist</h4><p class="item-price">R80</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--nude);display:flex;align-items:center;justify-content:center;font-size:28px">🫧</div><h4>Facial Cleanser</h4><p class="item-price">R90</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--nude);display:flex;align-items:center;justify-content:center;font-size:28px">✦</div><h4>Glow Serum</h4><p class="item-price">R120</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--nude);display:flex;align-items:center;justify-content:center;font-size:28px">🌸</div><h4>Eye Cream</h4><p class="item-price">R95</p></div>
+      </div>
+
+      <div class="pick-panel" id="panel-extras">
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:28px">🕯️</div><h4>Mini Candle</h4><p class="item-price">R85</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:28px">🪞</div><h4>Compact Mirror</h4><p class="item-price">R60</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:28px">💆</div><h4>Makeup Sponge Set</h4><p class="item-price">R50</p></div>
+        <div class="pick-item"><span class="check">✓</span><div class="pick-item-img" style="background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:28px">📝</div><h4>Personalised Note</h4><p class="item-price">Free</p></div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="order-summary">
+        <p class="summary-title">Your Selection</p>
+        <div class="summary-items" id="summaryItems">No items selected yet — click items above to add them.</div>
+        <div class="summary-footer">
+          <div>
+            <span class="summary-total" id="summaryTotal">R0</span>
+            <p class="summary-note">Final price confirmed via WhatsApp</p>
+          </div>
+          <a href="contact.html" class="btn btn-primary" id="orderBtn">Send Order via WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lash-cta">
+    <div class="container">
+      <div class="cta-box">
+        <p class="section-tag">Questions?</p>
+        <h2>Not sure what to include?</h2>
+        <p>Message us on WhatsApp and we'll help you put together the perfect box for any occasion or budget.</p>
+        <a href="contact.html" class="btn btn-light">Chat With Us</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">Akirah Beauty</span>
+        <p>Soft luxury beauty designed to enhance your natural radiance.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Shop</h4>
+        <a href="lashes.html">Lashes</a>
+        <a href="beauty-boxes.html">Beauty Boxes</a>
+        <a href="custom-boxes.html">Custom Boxes</a>
+        <a href="self-care.html">Self Care</a>
+      </div>
+      <div class="footer-links">
+        <h4>Info</h4>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Akirah Beauty · All rights reserved</span></div>
+  </footer>
+  <script>
+    const h=document.getElementById('hamburger'),n=document.getElementById('mobileNav'),o=document.getElementById('mobileOverlay');
+    function t(){n.classList.toggle('open');o.classList.toggle('open');h.classList.toggle('active')}
+    h.addEventListener('click',t);o.addEventListener('click',t);
+
+    // Tabs
+    document.querySelectorAll('.pick-tab').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.pick-tab').forEach(b=>b.classList.remove('active'));
+        document.querySelectorAll('.pick-panel').forEach(p=>p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-'+btn.dataset.panel).classList.add('active');
+      });
+    });
+
+    // Item selection & summary
+    const selected={};
+    document.querySelectorAll('.pick-item').forEach(item=>{
+      item.addEventListener('click',()=>{
+        const name=item.querySelector('h4').textContent;
+        const priceText=item.querySelector('.item-price').textContent;
+        const price=parseInt(priceText.replace('R',''))||0;
+        if(item.classList.contains('selected')){
+          item.classList.remove('selected');
+          delete selected[name];
+        }else{
+          item.classList.add('selected');
+          selected[name]=price;
+        }
+        updateSummary();
+      });
+    });
+
+    function updateSummary(){
+      const keys=Object.keys(selected);
+      const total=Object.values(selected).reduce((a,b)=>a+b,0);
+      document.getElementById('summaryItems').innerHTML=keys.length?keys.map(k=>`<span style="display:inline-block;background:var(--blush);padding:4px 10px;margin:3px;font-size:12px">${k}</span>`).join(''):'No items selected yet — click items above to add them.';
+      document.getElementById('summaryTotal').textContent='R'+total;
+    }
+  </script>
 </body>
 </html>
